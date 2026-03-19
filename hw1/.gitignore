@@ -1,25 +1,12 @@
-# Ignore everything except directory structure and Python scripts
-
-# Task output artifacts
-**/output/*
-
-# Python bytecode and caches
+**/output/
 __pycache__/
 *.py[cod]
-*$py.class
-*.pyo
-
-# Model checkpoint files
 *.pt
 *.pth
 *.ckpt
-
-# Keep only folders and .py scripts and ignore other file types
-*.json
-*.md
-
-# OS / IDE
 .DS_Store
 Thumbs.db
 *.swp
 *~
+.vscode/
+.claude/

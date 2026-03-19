@@ -68,14 +68,18 @@ def train(model, train_loader, val_loader, device, epochs=200, lr=0.01, l1_lambd
             xb, yb = xb.to(device), yb.to(device)
             optimizer.zero_grad()
             loss = nn.functional.cross_entropy(model(xb), yb)
-            l1 = sum(p.abs().sum() for n, p in model.named_parameters() if "weight" in n)
+            l1 = sum(
+                p.abs().sum() for n, p in model.named_parameters() if "weight" in n
+            )
             loss = loss + l1_lambda * l1
             loss.backward()
             optimizer.step()
         scheduler.step()
         if (epoch + 1) % 50 == 0:
             v = evaluate(model, val_loader, device)
-            print(f"Epoch {epoch+1}/{epochs}  Acc: {v['accuracy']:.4f}  F1: {v['f1']:.4f}")
+            print(
+                f"Epoch {epoch+1}/{epochs}  Acc: {v['accuracy']:.4f}  F1: {v['f1']:.4f}"
+            )
 
 
 def evaluate(model, data_loader, device, top_k=5):

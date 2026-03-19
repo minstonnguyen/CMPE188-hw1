@@ -60,7 +60,9 @@ def build_model(device=None):
     return nn.Sequential(nn.Linear(10, 3)).to(device)
 
 
-def train(model, train_loader, val_loader, device, epochs=500, lr=0.01, weight_decay=1e-4):
+def train(
+    model, train_loader, val_loader, device, epochs=500, lr=0.01, weight_decay=1e-4
+):
     model.train()
     opt = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
     for epoch in range(epochs):
@@ -72,7 +74,9 @@ def train(model, train_loader, val_loader, device, epochs=500, lr=0.01, weight_d
             opt.step()
         if (epoch + 1) % 100 == 0:
             v = evaluate(model, val_loader, device)
-            print(f"Epoch {epoch+1}/{epochs}  Acc: {v['accuracy']:.4f}  F1: {v['macro_f1']:.4f}")
+            print(
+                f"Epoch {epoch+1}/{epochs}  Acc: {v['accuracy']:.4f}  F1: {v['macro_f1']:.4f}"
+            )
 
 
 def evaluate(model, data_loader, device):
@@ -116,7 +120,9 @@ if __name__ == "__main__":
 
     train_m = evaluate(model, train_loader, device)
     val_m = evaluate(model, val_loader, device)
-    print(f"\nTrain  Acc: {train_m['accuracy']:.4f}  Macro-F1: {train_m['macro_f1']:.4f}")
+    print(
+        f"\nTrain  Acc: {train_m['accuracy']:.4f}  Macro-F1: {train_m['macro_f1']:.4f}"
+    )
     print(f"Val    Acc: {val_m['accuracy']:.4f}  Macro-F1: {val_m['macro_f1']:.4f}")
 
     if val_m["accuracy"] > 0.50 and val_m["macro_f1"] > 0.50:
